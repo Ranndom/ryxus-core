@@ -1,0 +1,24 @@
+{
+  "name": "ryxus-core",
+  "version": "0.0.1",
+  "description": "The RESTful API and core functionality for Ryxus",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ryxus/core.git"
+  },
+  "keywords": [
+    "ryxus",
+    "cms",
+    "api"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ryxus/core/issues"
+  },
+  "homepage": "https://github.com/ryxus/core#readme"
+}
