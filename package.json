@@ -3,14 +3,16 @@
   "version": "0.0.1",
   "description": "The RESTful API and core functionality for Ryxus",
   "author": "Ryxus",
-  "contributors": [{
-    "name": "Kodyn Kugis",
-    "email": "theholyketchup@qixalite.com"
-  },
-  {
-    "name": "Jayan Ratna",
-    "email": "kenyan@qixalite.com"
-  }],
+  "contributors": [
+    {
+      "name": "Kodyn Kugis",
+      "email": "theholyketchup@qixalite.com"
+    },
+    {
+      "name": "Jayan Ratna",
+      "email": "kenyan@qixalite.com"
+    }
+  ],
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -28,5 +30,9 @@
   "bugs": {
     "url": "https://github.com/ryxus/core/issues"
   },
-  "homepage": "https://github.com/ryxus/core#readme"
+  "homepage": "https://github.com/ryxus/core#readme",
+  "dependencies": {
+    "passport": "^0.3.2",
+    "restify": "^4.0.4"
+  }
 }
