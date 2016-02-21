@@ -1,5 +1,6 @@
 'use strict';
 
+import _ from 'underscore';
 import restify from 'restify';
 import bunyan from 'bunyan';
 import requireDir from 'require-dir';
@@ -34,11 +35,33 @@ server.pre(restify.pre.sanitizePath());
 
 server.on('after', restify.auditLogger({log: log}));
 
-/*
- * Routes
- */
+// Automatically includes routes.
+_.each(routes, (route, route_name) => {
+    // Check if the controller exports a restify router.
+    if (typeof route.applyRoutes == 'function') {
 
-routes.main.applyRoutes(server);
+        // Check if the controller has a prefix set (eg. '/users')
+        // if not, set the mount point using the name of the controller.
+        //
+        // The prefix is set to the filename of the controller with all underscores replaced with slashes, by default
+        // (eg. controllers/users.js will route to /users,
+        //      controllers/pages_home.js will route to /pages/home)
+
+        var prefix;
+
+        if (route.prefix !== undefined) {
+            prefix = route.mount_point;
+        } else {
+            prefix = route_name.replace(/_/, '/');
+            if (!prefix.startsWith("/")) {
+                prefix = "/" +  prefix;
+            }
+        }
+
+        route.applyRoutes(server, prefix);
+        log.info("Mounted controller", route_name, "to", prefix);
+    }
+});
 
 /*
  * Server startup
