@@ -14,17 +14,13 @@ var log = bunyan.createLogger({
     serializers: bunyan.stdSerializers
 });
 
-/*
- * Restify app
-*/
+// Restify app
 var server = restify.createServer({
     name: 'ryxus_api',
     log: log
 });
 
-/*
- * Middleware
- */
+// Middleware
 server.use(restify.bodyParser({ mapParams: false }));
 server.use(restify.queryParser());
 server.use(restify.gzipResponse());
@@ -34,15 +30,13 @@ server.pre(restify.pre.sanitizePath());
 
 server.on('after', restify.auditLogger({log: log}));
 
-/*
- * Routes
- */
-
+// Routes
 routes.main.applyRoutes(server);
+routes.users.applyRoutes(server);
+routes.groups.applyRoutes(server);
 
-/*
- * Server startup
- */
+
+// Server startup
 server.listen(config.api.port || 3000, function() {
     log.info("%s listening at %s", server.name, server.url);
 });
