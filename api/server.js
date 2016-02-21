@@ -50,7 +50,7 @@ _.each(routes, (route, route_name) => {
         var prefix;
 
         if (route.prefix !== undefined) {
-            prefix = route.mount_point;
+            prefix = route.prefix;
         } else {
             prefix = route_name.replace(/_/, '/');
             if (!prefix.startsWith("/")) {
