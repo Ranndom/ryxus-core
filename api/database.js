@@ -25,4 +25,6 @@ const database = bookshelf(knex(
     knexfile[process.env.environment || 'development']
 ));
 
+database.plugin('registry');
+
 module.exports = database;

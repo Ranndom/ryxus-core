@@ -30,6 +30,9 @@ server.pre(restify.pre.sanitizePath());
 
 server.on('after', restify.auditLogger({log: log}));
 
+import User from './models/user';
+import Group from './models/group';
+
 // Routes
 routes.main.applyRoutes(server);
 routes.users.applyRoutes(server, 'users');

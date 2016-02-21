@@ -8,11 +8,18 @@ import User from '../models/user';
 
 // Get user by ID
 router.get('/:id', (req, res, next) => {
-    new User({id: req.params.id}).fetch().then((user) => {
+    new User({id: req.params.id}).fetch(
+        {
+            withRelated: ['groups'],
+            debug: true
+        }
+    ).then((user) => {
         if (user) {
-            res.json(user.pick(
-                ['id', 'name', 'first_name', 'last_name']
-            ));
+            // res.json(user.pick(
+            //     ['id', 'name', 'first_name', 'last_name']
+            // ));
+            console.dir(user);
+            res.json(user);
             
             next();
         } else {
