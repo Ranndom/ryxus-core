@@ -10,7 +10,9 @@ import User from '../models/user';
 router.get('/:id', (req, res, next) => {
     new User({id: req.params.id}).fetch().then((user) => {
         if (user) {
-            res.json(user);
+            res.json(user.pick(
+                ['id', 'name', 'first_name', 'last_name']
+            ));
             
             next();
         } else {
@@ -18,8 +20,8 @@ router.get('/:id', (req, res, next) => {
         }
     }).catch((err) => {
         req.log.error(err);
-        res.json({error: "AHHHHH"});
-        next();
+        
+        next(new restify.InternalServerError('Error retrieving user.'));
     });
 });
 
