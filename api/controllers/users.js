@@ -9,16 +9,13 @@ import User from '../models/user';
 // Get user by ID
 router.get('/:id', (req, res, next) => {
     new User({id: req.params.id}).fetch().then((user) => {
-        // Do something with user.
-        // for now, just return it.
-        
         if (user) {
             res.json(user);
+            
+            next();
         } else {
-            res.json({error: "not found"});
+            next(new restify.NotFoundError("No user with such ID exists."));
         }
-        
-        next();
     }).catch((err) => {
         req.log.error(err);
         res.json({error: "AHHHHH"});
