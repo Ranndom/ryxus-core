@@ -19,7 +19,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "start": "babel-node index.js"
+    "start": "babel-node index.js | bunyan"
   },
   "repository": {
     "type": "git",
@@ -36,10 +36,13 @@
   },
   "homepage": "https://github.com/ryxus/core#readme",
   "dependencies": {
+    "bunyan": "^1.6.0",
     "babel-runtime": "^6.5.0",
     "mysql": "^2.10.2",
     "passport": "^0.3.2",
-    "restify": "^4.0.4"
+    "require-dir": "^0.3.0",
+    "restify": "^4.0.4",
+    "restify-router": "^0.2.1"
   },
   "devDependencies": {
     "babel-cli": "^6.5.1",
