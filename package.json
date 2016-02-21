@@ -2,7 +2,7 @@
   "name": "ryxus-core",
   "version": "0.0.1",
   "description": "The RESTful API and core functionality for Ryxus",
-  "author": "Ryxus",
+  "author": "Qixalite",
   "contributors": [
     {
       "name": "Kodyn Kugis",
@@ -19,7 +19,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -36,11 +36,15 @@
   },
   "homepage": "https://github.com/ryxus/core#readme",
   "dependencies": {
+    "babel-runtime": "^6.5.0",
+    "mysql": "^2.10.2",
     "passport": "^0.3.2",
     "restify": "^4.0.4"
   },
   "devDependencies": {
-    "babel-cli": "^6.5.1",
-    "babel-preset-es2015": "^6.5.0"
+    "babel-core": "^6.5.2",
+    "babel-loader": "^6.2.3",
+    "babel-preset-es2015": "^6.5.0",
+    "webpack": "^1.12.13"
   }
 }
