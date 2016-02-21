@@ -32,9 +32,9 @@ server.on('after', restify.auditLogger({log: log}));
 
 // Routes
 routes.main.applyRoutes(server);
-routes.users.applyRoutes(server);
-routes.groups.applyRoutes(server);
-
+routes.users.applyRoutes(server, 'users');
+routes.groups.applyRoutes(server, 'groups');
+routes.statistics.applyRoutes(server, 'statistics');
 
 // Server startup
 server.listen(config.api.port || 3000, function() {
