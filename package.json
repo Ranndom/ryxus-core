@@ -37,12 +37,15 @@
   "homepage": "https://github.com/ryxus/core#readme",
   "dependencies": {
     "babel-runtime": "^6.5.0",
+    "bookshelf": "^0.9.2",
     "bunyan": "^1.6.0",
+    "knex": "^0.10.0",
     "mysql": "^2.10.2",
     "passport": "^0.3.2",
     "require-dir": "^0.3.0",
     "restify": "^4.0.4",
     "restify-router": "ryxus/restify-router",
+    "sqlite3": "^3.1.1",
     "underscore": "^1.8.3"
   },
   "devDependencies": {

@@ -3,14 +3,10 @@
 import mysql from 'mysql';
 import bunyan from 'bunyan';
 import config from '../config/config.json';
+import knexfile from '../knexfile';
 
-const connection = mysql.createConnection({
-    host: config.database.host,
-    port: config.database.port,
-    user: config.database.user,
-    password: config.database.password,
-    database: config.database.db
-});
+import knex from 'knex';
+import bookshelf from 'bookshelf';
 
 /**
  * Create the database logger.
@@ -23,22 +19,10 @@ const log = bunyan.createLogger({
 });
 
 /**
- * Connect to the MySQL database using
- * credentials from the configuration.
+ * Create the Bookshelf instance.
  */
-connection.connect((err) => {
-    if (err) {
-        log.error({error: err}, 'Error connecting to database.');
-        return;
-    }
+const database = bookshelf(knex(
+    knexfile[process.env.environment || 'development']
+));
 
-    log.info('MySQL connected with thread id', connection.threadId);
-});
-
-connection.query('SELECT 1 + 1 AS solution', (err, rows, fields) => {
-    if (err) throw err;
-
-    log.info('The solution is:', rows[0].solution);
-});
-
-connection.end();
+module.exports = database;

@@ -38,3 +38,4 @@ jspm_packages
 
 # Ryxus
 config/config.json
+*.sqlite3
