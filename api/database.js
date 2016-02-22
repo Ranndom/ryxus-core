@@ -2,43 +2,37 @@
 
 import mysql from 'mysql';
 import bunyan from 'bunyan';
+import fs from 'fs';
+import path from 'path';
+import Sequelize from 'sequelize';
 import config from '../config/config.json';
-
-const connection = mysql.createConnection({
-    host: config.database.host,
-    port: config.database.port,
-    user: config.database.user,
-    password: config.database.password,
-    database: config.database.db
-});
 
 /**
  * Create the database logger.
  */
 const log = bunyan.createLogger({
     name: 'ryxus_database',
-    level: process.env.LOG_LEVEL || 'info',
+    level: process.env.LOG_LEVEL || 'debug',
     stream: process.stdout,
     serializers: bunyan.stdSerializers
 });
 
 /**
- * Connect to the MySQL database using
- * credentials from the configuration.
+ * Sequelize setup.
  */
-connection.connect((err) => {
-    if (err) {
-        log.error({error: err}, 'Error connecting to database.');
-        return;
-    }
+const basename = path.basename(module.filename);
+const env = process.env.NODE_ENV || 'development';
+const envConfig = config[env];
+envConfig['logging'] = log.debug.bind(log);
 
-    log.info('MySQL connected with thread id', connection.threadId);
+var database = (
+    config.use_env_variable ?
+        new Sequelize(process.env[envConfig.use_env_variable]) :
+        new Sequelize(envConfig.database, envConfig.username, null, envConfig)
+);
+
+database.authenticate().catch((err) => {
+    log.error(err);
 });
 
-connection.query('SELECT 1 + 1 AS solution', (err, rows, fields) => {
-    if (err) throw err;
-
-    log.info('The solution is:', rows[0].solution);
-});
-
-connection.end();
+module.exports = database;
